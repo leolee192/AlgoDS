@@ -51,10 +51,17 @@ public class UsingDirectBuffering {
 
         BufferedInputStream inputStream4 = new BufferedInputStream(new FileInputStream(new File(DumpDataWriter.input1000MB)));
         byte[] buffer4= new byte[2048*1024*5]; // 10MB
-        while (inputStream4.read(buffer4)!=-1){} // 3300 ms
+        int lineNum = 0;
+        while (inputStream4.read(buffer4)!=-1){
+            for (byte b:buffer4) {
+                if (b == '\n') {
+                    lineNum++;
+                }
+            }
+        } // 3300 ms
 
         long duration4 = StopWatch.stop();
         System.out.println(duration4);
-
+        System.out.println(lineNum + " lines");
     }
 }

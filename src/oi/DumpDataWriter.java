@@ -19,16 +19,20 @@ public class DumpDataWriter {
     static String input1000MB="input1000MB.txt";
 
     public static void main(String[] args) throws IOException {
-        //writeDumpData(input1MB, size1MB);
-        //writeDumpData(input10MB, size10MB);
-        //writeDumpData(input100MB, size100MB);
-        //writeDumpData(input1000MB, size1000MB);
+        writeDumpData(input1MB, size1MB);
+        writeDumpData(input10MB, size10MB);
+        writeDumpData(input100MB, size100MB);
+        writeDumpData(input1000MB, size1000MB);
     }
 
     static void writeDumpData(String filename, long size) throws IOException {
         BufferedOutputStream bufferedOutputStream= new BufferedOutputStream(new FileOutputStream(filename));
         for (int i = 0; i < size; i++) {
-            bufferedOutputStream.write(oneByte);
+            if (i % 1024 != 0) {
+                bufferedOutputStream.write(oneByte);
+            } else {
+                bufferedOutputStream.write('\n');
+            }
         }
         bufferedOutputStream.flush();
         bufferedOutputStream.close();

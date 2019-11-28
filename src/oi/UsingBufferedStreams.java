@@ -39,8 +39,15 @@ public class UsingBufferedStreams {
         StopWatch.start();
 
         BufferedInputStream inputStream4= new BufferedInputStream(new FileInputStream(new File(DumpDataWriter.input1000MB)));
-        while (inputStream4.read()!=-1){}
+        int b;
+        int lineNum = 0;
+        while ((b = inputStream4.read())!=-1){
+            if (b == '\n') {
+                ++lineNum;
+            }
+        }
         long duration4 = StopWatch.stop();
         System.out.println(duration4);
+        System.out.println(lineNum + " lines");
     }
 }
